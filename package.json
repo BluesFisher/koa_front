@@ -1,0 +1,63 @@
+{
+    "name": "h5",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "test:unit": "vue-cli-service test:unit"
+    },
+    "dependencies": {
+        "@sentry/cli": "^1.46.0",
+        "@sentry/webpack-plugin": "^1.7.0",
+        "axios": "^0.19.0",
+        "core-js": "^2.6.5",
+        "crypto": "^1.0.1",
+        "lib-flexible": "^0.3.2",
+        "mta-h5-analysis": "^2.0.15",
+        "optimize-css-assets-webpack-plugin": "^5.0.1",
+        "postcss-px2rem": "^0.3.0",
+        "raven-js": "^3.27.2",
+        "register-service-worker": "^1.6.2",
+        "uglifyjs-webpack-plugin": "^2.1.3",
+        "vue": "^2.6.10",
+        "vue-class-component": "^7.0.2",
+        "vue-cookies": "^1.7.0",
+        "vue-property-decorator": "^8.1.0",
+        "vue-router": "^3.0.3",
+        "vuex": "^3.0.1"
+    },
+    "devDependencies": {
+        "@types/jest": "^23.1.4",
+        "@types/node": "^12.0.10",
+        "@vue/cli-plugin-babel": "^3.8.0",
+        "@vue/cli-plugin-pwa": "^3.8.0",
+        "@vue/cli-plugin-typescript": "^3.8.0",
+        "@vue/cli-plugin-unit-jest": "^3.8.0",
+        "@vue/cli-service": "^3.8.0",
+        "@vue/test-utils": "1.0.0-beta.29",
+        "babel-core": "7.0.0-bridge.0",
+        "less": "^3.0.4",
+        "less-loader": "^4.1.0",
+        "lint-staged": "^8.1.5",
+        "style-resources-loader": "^1.2.1",
+        "ts-jest": "^23.0.0",
+        "typescript": "^3.4.3",
+        "vue-cli-plugin-style-resources-loader": "^0.1.3",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "gitHooks": {
+        "pre-commit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "vue-cli-service lint",
+            "git add"
+        ],
+        "*.vue": [
+            "vue-cli-service lint",
+            "git add"
+        ]
+    }
+}

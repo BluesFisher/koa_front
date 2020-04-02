@@ -1,0 +1,7 @@
+[defaults]
+url = http://sentry.io/
+org = h5_init
+project = h5_init
+
+[auth]
+token = 5e51e7ccde994db4b301913007ffb9a97b6540313aad48f186d054de0762a48c
