@@ -24,6 +24,7 @@ export default class Home extends Vue {
   // 声明周期钩子
   public async created() {
     console.log("login");
+    await this.getUserInfo();
   }
 
   // 计算属性

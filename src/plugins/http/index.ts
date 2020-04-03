@@ -1,5 +1,6 @@
 import axios from "./http";
 import router from "@/router";
+import * as utils from "@/utils";
 
 interface ICommonParams {
   url?: string;
@@ -50,11 +51,19 @@ const Axios = {
 
       if (error.status === 401) {
         if (!location.href.includes("cas")) {
-          location.href = `http://cas.test.com:8080?redirect=${encodeURIComponent(
-            location.href
+          let redirectUrl = location.href;
+          const token = utils.commonFunc.getUrlKey("token");
+          if (token) {
+            redirectUrl = redirectUrl
+              .replace(`token=${token}`, "")
+              .replace(/(\?|&)$/, "");
+          }
+          location.href = `http://cas.test.com:8080/login?redirect=${encodeURIComponent(
+            redirectUrl
           )}`;
         } else {
-          router.push({ path: "/login" });
+          const redirect = utils.commonFunc.getUrlKey("redirect");
+          router.push({ path: `/login?redirect=${redirect}` });
         }
       } else {
         location.href = "/";

@@ -28,12 +28,7 @@ export default class Home extends Vue {
   public async created() {
     // this.$mtaH5.pgv();
     // this.$mtaH5.clickStat("test_click", { token: "12" });
-
-    const redirect = this.$utils.commonFunc.getUrlKey("redirect");
     const token = this.$utils.commonFunc.getUrlKey("token");
-    if (redirect) {
-      localStorage.cas_redirect = redirect;
-    }
 
     if (token) {
       this.$cookies.set("token", this.$utils.crypt.decrypt(token));
