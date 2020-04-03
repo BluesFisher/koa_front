@@ -36,8 +36,8 @@ const Axios = {
       data = JSON.stringify(data);
     }
     try {
-      const res = await axios.post(url, data);
-      if (res.status === 200) {
+      const res = (await axios.post(url, data)) || {};
+      if (res && res.status === 200) {
         const result = res.data;
         // tslint:disable-next-line:no-unused-expression
         callback && callback(result);
@@ -47,8 +47,15 @@ const Axios = {
       return null;
     } catch (error) {
       console.log("post catch error: ", error);
-      if (error.code === 401) {
-        router.push({ path: "/login" });
+
+      if (error.status === 401) {
+        if (!location.href.includes("cas")) {
+          location.href = `http://cas.test.com:8080?redirect=${encodeURIComponent(
+            location.href
+          )}`;
+        } else {
+          router.push({ path: "/login" });
+        }
       } else {
         location.href = "/";
       }

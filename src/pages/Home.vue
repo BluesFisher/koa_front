@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
-    <HelloWorld :msg="csrfToken" />
-  </div>
+    <div class="home">
+        <HelloWorld :msg="csrfToken" />
+    </div>
 </template>
 
 <script lang="ts">
@@ -27,10 +27,18 @@ export default class Home extends Vue {
   // 声明周期钩子
   public async created() {
     // this.$mtaH5.pgv();
-
     // this.$mtaH5.clickStat("test_click", { token: "12" });
 
-    await this.getCsrfToken();
+    const redirect = this.$utils.commonFunc.getUrlKey("redirect");
+    const token = this.$utils.commonFunc.getUrlKey("token");
+    if (redirect) {
+      localStorage.cas_redirect = redirect;
+    }
+
+    if (token) {
+      this.$cookies.set("token", this.$utils.crypt.decrypt(token));
+    }
+
     await this.getUserInfo();
   }
 
@@ -44,18 +52,8 @@ export default class Home extends Vue {
     alert(`greeting: ${this.msg}`);
   }
 
-  public async getCsrfToken() {
-    const { data = {} } = await this.$axios.get({
-      url: "/getBaseInfo"
-    });
-
-    this.$store.dispatch("auth/setCsrfToken", {
-      csrfToken: data.csrfToken || ""
-    });
-  }
-
   public async getUserInfo() {
-    await this.$axios.post({
+    const { code } = await this.$axios.post({
       url: "/user/getUserInfo", // getUserInfo loginWithPassword
 
       data: {
@@ -63,6 +61,7 @@ export default class Home extends Vue {
         password: "12345678"
       }
     });
+    this.$utils.commonFunc.judgeRedirect(code);
   }
 }
 </script>

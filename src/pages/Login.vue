@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
-    <div @click="login">login</div>
-  </div>
+    <div class="login">
+        <div @click="login">login</div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -37,17 +37,19 @@ export default class Home extends Vue {
 
   // 方法
   public async getUserInfo() {
-    this.$axios.post({
+    const { code, data } = await this.$axios.post({
       url: "/user/getUserInfo", // getUserInfo loginWithPassword
       data: {
         phone: "13612817761",
         password: "12345678"
       }
     });
+
+    this.$utils.commonFunc.judgeRedirect(code);
   }
 
   public async login() {
-    await this.$axios.post({
+    const { code, data } = await this.$axios.post({
       url: "/user/loginWithPassword",
       data: {
         phone: "13612817761",

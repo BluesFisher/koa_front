@@ -4,12 +4,14 @@ import TimeReport from "./timeReport";
 import Raven from "raven-js";
 import RavenVue from "raven-js/plugins/vue";
 import VueCookies from "vue-cookies";
+import * as utils from "@/utils";
 
 declare module "vue/types/vue" {
   interface Vue {
     $axios: any;
     $mtaH5: any;
     $timeReport: any;
+    $utils: any;
   }
 }
 
@@ -44,6 +46,7 @@ const MyPlugin = {
 
     Vue.prototype.$mtaH5 = MtaH5(res);
     Vue.prototype.$timeReport = TimeReport(res);
+    Vue.prototype.$utils = utils;
 
     // 5. 错误处理
     // sentry

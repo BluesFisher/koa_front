@@ -22,7 +22,7 @@ instance.interceptors.request.use(
     if (config.url && config.url.startsWith("/static")) {
       config.baseURL = "/";
     } else {
-      //   config.baseURL = `http://${location.host.split(":")[0]}:3000`;
+      config.baseURL = `http://${location.host.split(":")[0]}:3000`;
     }
 
     config.headers = {
@@ -53,7 +53,7 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    return Promise.reject(error.response.data); // 返回接口返回的错误信息
+    return Promise.reject(error.response); // 返回接口返回的错误信息
   }
 );
 
