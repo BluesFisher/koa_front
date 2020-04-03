@@ -24,7 +24,7 @@
 
 10、src/utils：公共函数模块，目前包括 crtpy 加解密模块、api-group 接口声明模块
 
-11、src/plugins：全局变量注入，包括$axios、 $mtaH5、 \$timeReport
+11、src/plugins：全局变量注入，包括$axios、 $mtaH5、 $timeReport、sentry错误监控
 
 12、main.ts：主入口文件，vue 全局设置，router 守卫
 
