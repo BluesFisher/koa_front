@@ -17,13 +17,17 @@ export const getUrlKey = (name: string, url: string = location.href) => {
 };
 
 export const getCsrfToken = async () => {
-  const { data = {} } = await axios.get({
-    url: "/getBaseInfo"
-  });
+  try {
+    const { data = {} } = await axios.get({
+      url: "/getBaseInfo"
+    });
 
-  store.dispatch("auth/setCsrfToken", {
-    csrfToken: data.csrfToken || ""
-  });
+    store.dispatch("auth/setCsrfToken", {
+      csrfToken: data.csrfToken || ""
+    });
+  } catch (error) {
+    // TODO
+  }
 };
 
 export const judgeRedirect = (code: number) => {
